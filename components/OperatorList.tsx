@@ -9,12 +9,17 @@ interface IListLinkProps {
 
 const ListWrapper = styled.div`
   padding: 25px;
+  max-width: 870px;
 `;
 
 const List = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   background: #fff;
   list-style: none;
+  @media (max-width: 550px) {
+    justify-content: space-around;
+  }
 `;
 
 const ListItem = styled.li`
