@@ -59,9 +59,9 @@ export const OperatorList = () => {
     <ListWrapper>
       <h1 className={'title'}>Выберете оператора</h1>
       <List>
-        {operators?.map(({ name, color, img }) => (
+        {operators?.map(({ name, color, img, linkName }) => (
           <ListItem key={name}>
-            <ListLink href={'#'} shadowColor={color}>
+            <ListLink href={linkName} shadowColor={color}>
               <ListLinkIcon>
                 <Image
                   src={img}
