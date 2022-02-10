@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import { createGlobalStyle } from 'styled-components';
+import { OperatorsWrapper } from '../operators.context';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -38,7 +39,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <OperatorsWrapper>
+        <Component {...pageProps} />
+      </OperatorsWrapper>
     </>
   );
 }

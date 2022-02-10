@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { useOperatorContext } from '../operators.context';
 
 interface IListLinkProps {
   shadowColor?: string;
@@ -48,50 +49,26 @@ const ListLinkIcon = styled.div`
 `;
 
 export const OperatorList = () => {
-  const operators = [];
+  const operators = useOperatorContext();
   return (
     <ListWrapper>
       <h1 className={'title'}>Выберете оператора</h1>
       <List>
-        <ListItem>
-          <ListLink href={'#'} shadowColor={'#f35e5e7a'}>
-            <ListLinkIcon>
-              <Image
-                src="/mts.png"
-                alt="мтс"
-                objectFit={'contain'}
-                layout={'fill'}
-              />
-            </ListLinkIcon>
-            МТС
-          </ListLink>
-        </ListItem>
-        <ListItem>
-          <ListLink href={'#'} shadowColor={'#72db917a'}>
-            <ListLinkIcon>
-              <Image
-                src="/megafon.png"
-                alt="мегафон"
-                objectFit={'contain'}
-                layout={'fill'}
-              />
-            </ListLinkIcon>
-            Мегафон
-          </ListLink>
-        </ListItem>
-        <ListItem>
-          <ListLink href={'#'} shadowColor={'#f3e15b7a'}>
-            <ListLinkIcon>
-              <Image
-                src="/beeline.png"
-                alt="билайн"
-                objectFit={'contain'}
-                layout={'fill'}
-              />
-            </ListLinkIcon>
-            Билайн
-          </ListLink>
-        </ListItem>
+        {operators?.map(({ name, color, img }) => (
+          <ListItem key={name}>
+            <ListLink href={'#'} shadowColor={color}>
+              <ListLinkIcon>
+                <Image
+                  src={img}
+                  alt={name}
+                  objectFit={'contain'}
+                  layout={'fill'}
+                />
+              </ListLinkIcon>
+              {name}
+            </ListLink>
+          </ListItem>
+        ))}
       </List>
     </ListWrapper>
   );
