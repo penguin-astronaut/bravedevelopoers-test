@@ -8,10 +8,8 @@ const Home: NextPage = () => {
       <Head>
         <title>Терминал оплаты мобильной связи</title>
       </Head>
-      <div className={'wrapper'}>
-        <div className="card">
-          <OperatorList />
-        </div>
+      <div className="card">
+        <OperatorList />
       </div>
     </>
   );

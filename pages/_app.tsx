@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import { createGlobalStyle } from 'styled-components';
 import { OperatorsWrapper } from '../operators.context';
+import { Layout } from '../components/Layout';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -13,13 +14,6 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     background-color: #dedede;
-  }
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
   }
   .card {
     border: 0.5px solid rgba(0, 0, 0, 0.08);
@@ -40,7 +34,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <GlobalStyle />
       <OperatorsWrapper>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </OperatorsWrapper>
     </>
   );
