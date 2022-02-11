@@ -15,11 +15,9 @@ const ListWrapper = styled.div`
 const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   background: #fff;
   list-style: none;
-  @media (max-width: 550px) {
-    justify-content: space-around;
-  }
 `;
 
 const ListItem = styled.li`
@@ -43,6 +41,10 @@ const ListLink = styled.a<IListLinkProps>`
     box-shadow: 0 0 10px 4px
       ${(props) => props.shadowColor || 'rgba(34, 60, 80, 0.16)'};
   }
+  @media (max-width: 400px) {
+    width: 200px;
+    height: 65px;
+  }
 `;
 
 const ListLinkIcon = styled.div`
@@ -60,6 +62,21 @@ export const OperatorList = () => {
       <h1 className={'title'}>Выберете оператора</h1>
       <List>
         {operators?.map(({ name, color, img, linkName }) => (
+          <ListItem key={name}>
+            <ListLink href={linkName} shadowColor={color}>
+              <ListLinkIcon>
+                <Image
+                  src={img}
+                  alt={name}
+                  objectFit={'contain'}
+                  layout={'fill'}
+                />
+              </ListLinkIcon>
+              {name}
+            </ListLink>
+          </ListItem>
+        ))}
+        {operators?.slice(0, 2).map(({ name, color, img, linkName }) => (
           <ListItem key={name}>
             <ListLink href={linkName} shadowColor={color}>
               <ListLinkIcon>
