@@ -65,27 +65,7 @@ export const OperatorList = () => {
           <ListItem key={name}>
             <ListLink href={linkName} shadowColor={color}>
               <ListLinkIcon>
-                <Image
-                  src={img}
-                  alt={name}
-                  objectFit={'contain'}
-                  layout={'fill'}
-                />
-              </ListLinkIcon>
-              {name}
-            </ListLink>
-          </ListItem>
-        ))}
-        {operators?.slice(0, 2).map(({ name, color, img, linkName }) => (
-          <ListItem key={name}>
-            <ListLink href={linkName} shadowColor={color}>
-              <ListLinkIcon>
-                <Image
-                  src={img}
-                  alt={name}
-                  objectFit={'contain'}
-                  layout={'fill'}
-                />
+                <Image src={img} alt={name} width={35} height={35} />
               </ListLinkIcon>
               {name}
             </ListLink>
