@@ -15,8 +15,8 @@ const CardWrapper = styled.div`
 `;
 
 const CardTitle = styled.h1`
-  font-size: 25px;
-  font-weight: 600;
+  font-size: 27px;
+  font-weight: 500;
   margin-bottom: 20px;
   text-align: center;
 `;
