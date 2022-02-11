@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { useOperatorContext } from '../operators.context';
 
@@ -35,6 +36,7 @@ const ListLink = styled.a<IListLinkProps>`
   text-decoration: none;
   font-size: 18px;
   color: #000;
+  cursor: pointer;
   transition: all 0.3s;
   &:hover {
     box-shadow: 0 0 10px 4px
@@ -61,12 +63,14 @@ export const OperatorList = () => {
       <List>
         {operators?.map(({ name, color, img, linkName }) => (
           <ListItem key={name}>
-            <ListLink href={linkName} shadowColor={color}>
-              <ListLinkIcon>
-                <Image src={img} alt={name} width={35} height={35} />
-              </ListLinkIcon>
-              {name}
-            </ListLink>
+            <Link href={linkName} passHref>
+              <ListLink shadowColor={color}>
+                <ListLinkIcon>
+                  <Image src={img} alt={name} width={35} height={35} />
+                </ListLinkIcon>
+                {name}
+              </ListLink>
+            </Link>
           </ListItem>
         ))}
       </List>
