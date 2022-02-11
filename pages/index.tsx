@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { OperatorList } from '../components/OperatorList';
+import { Card } from '../components/Card';
 
 const Home: NextPage = () => {
   return (
@@ -8,9 +9,9 @@ const Home: NextPage = () => {
       <Head>
         <title>Терминал оплаты мобильной связи</title>
       </Head>
-      <div className="card">
+      <Card title={'Выберите оператора'}>
         <OperatorList />
-      </div>
+      </Card>
     </>
   );
 };

@@ -8,7 +8,6 @@ interface IListLinkProps {
 }
 
 const ListWrapper = styled.div`
-  padding: 25px;
   max-width: 870px;
 `;
 
@@ -59,7 +58,6 @@ export const OperatorList = () => {
   const operators = useOperatorContext();
   return (
     <ListWrapper>
-      <h1 className={'title'}>Выберете оператора</h1>
       <List>
         {operators?.map(({ name, color, img, linkName }) => (
           <ListItem key={name}>

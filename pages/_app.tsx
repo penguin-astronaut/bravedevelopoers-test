@@ -15,18 +15,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: #dedede;
   }
-  .card {
-    border: 0.5px solid rgba(0, 0, 0, 0.08);
-    border-radius: 6px;
-    background: #fff;
-    overflow: hidden;
-  }
-  .title {
-    font-size: 25px;
-    font-weight: 6000;
-    margin-bottom: 20px;
-    text-align: center;
-  }
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
