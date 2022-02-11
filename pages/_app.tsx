@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   html {
-    font-family: Arial, sans-serif;
+    font-family: Roboto, Arial, sans-serif;
   }
   body {
     background-color: #dedede;
