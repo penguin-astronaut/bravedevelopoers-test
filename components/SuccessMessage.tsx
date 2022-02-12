@@ -4,8 +4,16 @@ import {
   MessageText,
   MessageTextWrapper,
 } from './MessageLayout';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export const SuccessMessage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => router.push('/'), 5000);
+  }, []);
+
   return (
     <MessageLayout>
       <MessageTextWrapper>
