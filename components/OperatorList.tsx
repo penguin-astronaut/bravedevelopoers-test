@@ -63,7 +63,7 @@ export const OperatorList = () => {
       <List>
         {operators?.map(({ name, color, img, linkName }) => (
           <ListItem key={name}>
-            <Link href={linkName} passHref>
+            <Link href={`/${linkName}`} passHref>
               <ListLink shadowColor={color}>
                 <ListLinkIcon>
                   <Image src={img} alt={name} width={35} height={35} />
