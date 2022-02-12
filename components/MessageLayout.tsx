@@ -28,7 +28,7 @@ export const MessageText = styled.p`
   font-weight: 500;
 `;
 
-export const MessageTextWrapper = styled.p`
+export const MessageTextWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
