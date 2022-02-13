@@ -12,6 +12,10 @@ import { ButtonSecondary, ButtonSuccess } from './Button';
 const ButtonsWrapper = styled.div`
   margin-top: 20px;
   display: flex;
+  @media (max-width: 420px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const ButtonWrapper = styled.div`

@@ -30,6 +30,7 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   width: 300px;
+  max-width: 100%;
 `;
 
 type ButtonProps = {
@@ -85,7 +86,6 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
     phone: '',
     sum: '',
   });
-  console.log(formErrors);
   const onSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     let isErrors = false;
@@ -97,7 +97,6 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
       isErrors = true;
     }
     if (parseInt(sum) < 1 || parseInt(sum) > 1000) {
-      console.log(2323);
       setFormErrors((prevState) => ({
         ...prevState,
         sum: 'Сумма должна быть больше 1 и меньше 1000',

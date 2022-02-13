@@ -22,7 +22,7 @@ const CardBody = styled.div`
 
 const CardHeader = styled.div`
   position: relative;
-  padding: 10px;
+  padding: 15px;
 `;
 
 const CardLink = styled.div`

@@ -19,16 +19,27 @@ export const MessageLayout = styled(Wrapper)`
   flex-direction: column;
   padding: 20px;
   animation: ${scale} 1s;
+  @media (max-width: 420px) {
+    height: auto;
+    width: 100%;
+  }
 `;
 
 export const MessageText = styled.p`
   font-size: 21px;
   margin-left: 13px;
   font-weight: 500;
+  @media (max-width: 420px) {
+    margin-top: 10px;
+  }
 `;
 
 export const MessageTextWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 420px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
