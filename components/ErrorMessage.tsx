@@ -31,7 +31,13 @@ export const ErrorMessage = ({ clickHandler }: ErrorMessage) => {
   return (
     <MessageLayout>
       <MessageTextWrapper>
-        <Image src={'/error.png'} width={50} height={50} alt={'error'} />
+        <Image
+          src={'/error.svg'}
+          width={50}
+          height={50}
+          alt={'error'}
+          priority={true}
+        />
         <MessageText>Оплата не удалась</MessageText>
       </MessageTextWrapper>
       <ButtonsWrapper>
