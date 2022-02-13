@@ -1,15 +1,29 @@
 import React from 'react';
 import InputMask, { Props as InputMaskProps } from 'react-input-mask';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 type InputWrapperProp = {
-  error?: Boolean;
+  error?: string;
 };
 const InputWrapper = styled.div<InputWrapperProp>`
   width: 100%;
   position: relative;
   margin-bottom: 20px;
   font-size: 18px;
+  ${(props) => {
+    if (props.error) {
+      return css`
+        ${Placeholder} {
+          color: var(--errorColor) !important;
+        }
+        ${InputHTML} {
+          outline-color: var(--errorColor) !important;
+          border-color: var(--errorColor) !important;
+          color: var(--errorColor);
+        }
+      `;
+    }
+  }}
 `;
 
 const Placeholder = styled.p`
@@ -22,6 +36,12 @@ const Placeholder = styled.p`
   transition: all 0.2s;
   background: #fff;
   pointer-events: none;
+`;
+
+const ErrorMessage = styled.p`
+  margin-top: 5px;
+  font-size: 13px;
+  color: var(--errorColor);
 `;
 
 const InputHTML = styled(InputMask)`
@@ -41,9 +61,13 @@ const InputHTML = styled(InputMask)`
   }
 `;
 
-export const Input = ({ placeholder, mask, ...props }: InputMaskProps) => {
+interface InputProps extends InputMaskProps {
+  error?: string;
+}
+
+export const Input = ({ error, placeholder, mask, ...props }: InputProps) => {
   return (
-    <InputWrapper>
+    <InputWrapper error={error}>
       <InputHTML
         type="text"
         mask={mask}
@@ -52,6 +76,7 @@ export const Input = ({ placeholder, mask, ...props }: InputMaskProps) => {
         {...props}
       />
       <Placeholder>{placeholder}</Placeholder>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </InputWrapper>
   );
 };

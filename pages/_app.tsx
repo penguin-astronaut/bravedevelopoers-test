@@ -5,6 +5,7 @@ import { Layout } from '../components/Layout';
 const GlobalStyle = createGlobalStyle`
   :root {
     --mainColor: #00bcd4;
+    --errorColor: #e91e63;
     --borderRadius: 6px;
   }
   * {

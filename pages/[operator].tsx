@@ -7,8 +7,8 @@ import { Card } from '../components/Card';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { api } from '../utils/apiFake';
 import { SuccessMessage } from '../components/SuccessMessage';
+import { api } from '../utils/apiFake';
 import { getOperator, getOperatorsLinkName, IOperator } from '../lib/operators';
 
 const OperatorWrapper = styled.div`
@@ -70,15 +70,44 @@ type PaymentProps = {
   operator: IOperator;
 };
 
+type FormErrorState = {
+  phone: string;
+  sum: string;
+};
+
 const Payment: NextPage<PaymentProps> = ({ operator }) => {
   const [phone, setPhone] = useState('');
   const [sum, setSum] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-
+  const [formErrors, setFormErrors] = useState<FormErrorState>({
+    phone: '',
+    sum: '',
+  });
+  console.log(formErrors);
   const onSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
+    let isErrors = false;
+    if (phone.length != 17) {
+      setFormErrors((prevState) => ({
+        ...prevState,
+        phone: 'Неверный номер телефона',
+      }));
+      isErrors = true;
+    }
+    if (parseInt(sum) < 1 || parseInt(sum) > 1000) {
+      console.log(2323);
+      setFormErrors((prevState) => ({
+        ...prevState,
+        sum: 'Сумма должна быть больше 1 и меньше 1000',
+      }));
+      isErrors = true;
+    }
+
+    if (isErrors) {
+      return;
+    }
 
     setIsLoading(true);
 
@@ -115,14 +144,28 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
         <Input
           placeholder={'Телефон'}
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e) => {
+            setPhone(e.target.value);
+            setFormErrors((prevState) => ({
+              ...prevState,
+              phone: '',
+            }));
+          }}
           mask={'+7(\\999) 999 99 99'}
+          error={formErrors.phone}
         />
         <Input
           placeholder={'Сумма'}
           value={sum}
-          onChange={(e) => setSum(e.target.value)}
+          onChange={(e) => {
+            setSum(e.target.value);
+            setFormErrors((prevState) => ({
+              ...prevState,
+              sum: '',
+            }));
+          }}
           mask={'9999'}
+          error={formErrors.sum}
         />
         <SubmitButton isAnimate={isLoading} disabled={isLoading}>
           Оплатить
