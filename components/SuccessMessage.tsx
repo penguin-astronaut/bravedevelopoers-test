@@ -14,12 +14,12 @@ export const SuccessMessage = () => {
     const timeout = setTimeout(() => router.push('/'), 5000);
 
     return () => clearTimeout(timeout);
-  }, []);
+  });
 
   return (
     <MessageLayout>
       <MessageTextWrapper>
-        <Image src={'/success.svg'} width={50} height={50} />
+        <Image src={'/success.svg'} width={50} height={50} alt={'success'} />
         <MessageText>Оплата прошла успешно!</MessageText>
       </MessageTextWrapper>
     </MessageLayout>

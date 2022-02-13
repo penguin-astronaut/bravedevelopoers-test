@@ -40,7 +40,12 @@ export const Card = ({ title, children, isShowLink }: ICardProps) => {
       <CardHeader>
         {isShowLink && (
           <CardLink onClick={() => router.back()}>
-            <Image src={'/arrow-left.svg'} width={25} height={25} />
+            <Image
+              src={'/arrow-left.svg'}
+              width={25}
+              height={25}
+              alt={'назад'}
+            />
           </CardLink>
         )}
         <CardTitle>{title}</CardTitle>

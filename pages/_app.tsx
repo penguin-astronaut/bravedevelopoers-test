@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { createGlobalStyle } from 'styled-components';
 import { Layout } from '../components/Layout';
@@ -22,6 +23,9 @@ const GlobalStyle = createGlobalStyle`
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <title>Терминал оплаты</title>
+      </Head>
       <GlobalStyle />
       <Layout>
         <Component {...pageProps} />
