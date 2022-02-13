@@ -141,7 +141,7 @@ const Payment: NextPage = () => {
           placeholder={'Сумма'}
           value={sum}
           onChange={(e) => setSum(e.target.value)}
-          mask={'9999.99'}
+          mask={'9999'}
         />
         <SubmitButton isAnimate={isLoading} disabled={isLoading}>
           Оплатить

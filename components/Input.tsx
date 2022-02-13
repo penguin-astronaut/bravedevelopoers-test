@@ -1,5 +1,5 @@
 import React from 'react';
-import InputMask from 'react-input-mask';
+import InputMask, { Props as InputMaskProps } from 'react-input-mask';
 import styled from 'styled-components';
 
 type InputWrapperProp = {
@@ -41,27 +41,16 @@ const Placeholder = styled.p`
   padding: 4px 6px;
 `;
 
-type InputProps = {
+interface InputProps extends InputMaskProps {
   placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
-  mask: string;
-};
+}
 
-export const Input = ({
-  placeholder,
-  onChange,
-  value,
-  mask,
-  ...props
-}: InputProps) => {
+export const Input = ({ placeholder, mask, ...props }: InputProps) => {
   return (
     <InputWrapper>
       <InputHTML
         type="text"
         mask={mask}
-        onChange={onChange}
-        value={value}
         maskPlaceholder={null}
         required
         {...props}
