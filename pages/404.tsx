@@ -24,7 +24,7 @@ const Text = styled.p`
 
 const MainLink = styled.a`
   font-size: 20px;
-  color: #00bcd4;
+  color: var(--mainColor);
   text-decoration: none;
 `;
 

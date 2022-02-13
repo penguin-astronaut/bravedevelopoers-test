@@ -3,6 +3,10 @@ import { createGlobalStyle } from 'styled-components';
 import { Layout } from '../components/Layout';
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --mainColor: #00bcd4;
+    --borderRadius: 6px;
+  }
   * {
     margin: 0;
     padding: 0;

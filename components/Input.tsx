@@ -29,15 +29,15 @@ const InputHTML = styled(InputMask)`
   height: 45px;
   padding: 0 12px;
   border: 2px solid #a19e9e;
-  border-radius: 6px;
+  border-radius: var(--borderRadius);
   font-size: 17px;
-  outline-color: #00bcd4;
+  outline-color: var(--mainColor);
   &:focus + ${Placeholder}, &:valid + ${Placeholder} {
     top: -11px;
     font-size: 12px;
   }
   &:focus + ${Placeholder} {
-    color: #00bcd4;
+    color: var(--mainColor);
   }
 `;
 

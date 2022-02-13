@@ -36,7 +36,7 @@ const ListLink = styled.a<IListLinkProps>`
   height: 60px;
   border: 0.5px solid rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
-  border-radius: 6px;
+  border-radius: var(--borderRadius);
   text-decoration: none;
   font-size: 18px;
   color: #000;

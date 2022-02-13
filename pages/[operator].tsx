@@ -53,8 +53,8 @@ const SubmitButton = styled(Button)<ButtonProps>`
   ${(props) => {
     if (props.isAnimate) {
       return css`
-        border: 6px solid transparent;
-        border-top-color: #00bcd4;
+        border: var(--borderRadius) solid transparent;
+        border-top-color: var(--mainColor);
         animation: ${rotate} 1s linear infinite;
         animation-delay: 0.4s;
         pointer-events: none;
