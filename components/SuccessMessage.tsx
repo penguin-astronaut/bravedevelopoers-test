@@ -12,6 +12,8 @@ export const SuccessMessage = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => router.push('/'), 5000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
