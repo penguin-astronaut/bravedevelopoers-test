@@ -2,19 +2,13 @@ import React, { ReactNode } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import { Wrapper } from './Wrapper';
 
 type ICardProps = {
   title: string;
   children: ReactNode;
   isShowLink?: boolean;
 };
-
-const CardWrapper = styled.div`
-  border: 0.5px solid rgba(0, 0, 0, 0.08);
-  border-radius: 6px;
-  background: #fff;
-  overflow: hidden;
-`;
 
 const CardTitle = styled.h1`
   font-size: 28px;
@@ -42,7 +36,7 @@ export const Card = ({ title, children, isShowLink }: ICardProps) => {
   const router = useRouter();
 
   return (
-    <CardWrapper>
+    <Wrapper>
       <CardHeader>
         {isShowLink && (
           <CardLink onClick={() => router.back()}>
@@ -52,6 +46,6 @@ export const Card = ({ title, children, isShowLink }: ICardProps) => {
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardBody>{children}</CardBody>
-    </CardWrapper>
+    </Wrapper>
   );
 };

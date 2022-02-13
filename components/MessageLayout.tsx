@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { Wrapper } from './Wrapper';
 
 const scale = keyframes`
   0% {
@@ -9,7 +10,7 @@ const scale = keyframes`
   }
 `;
 
-export const MessageLayout = styled.div`
+export const MessageLayout = styled(Wrapper)`
   width: 400px;
   height: 250px;
   display: flex;
@@ -17,8 +18,6 @@ export const MessageLayout = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 20px;
-  background: #fff;
-  border-radius: 6px;
   animation: ${scale} 1s;
 `;
 
