@@ -11,6 +11,7 @@ import { IOperator, useOperatorContext } from '../operators.context';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { api } from '../utils/apiFake';
 import { SuccessMessage } from '../components/SuccessMessage';
+import { string } from 'prop-types';
 
 const OperatorWrapper = styled.div`
   display: flex;
@@ -70,6 +71,8 @@ const SubmitButton = styled(Button)<ButtonProps>`
 const Payment: NextPage = () => {
   const router = useRouter();
   const [operator, setOperator] = useState<IOperator | null>(null);
+  const [phone, setPhone] = useState('');
+  const [sum, setSum] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -128,8 +131,18 @@ const Payment: NextPage = () => {
         </OperatorWrapper>
       )}
       <Form onSubmit={onSubmit}>
-        <Input placeholder={'Телефон'} />
-        <Input placeholder={'Сумма'} />
+        <Input
+          placeholder={'Телефон'}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          mask={'+7(\\999) 999 99 99'}
+        />
+        <Input
+          placeholder={'Сумма'}
+          value={sum}
+          onChange={(e) => setSum(e.target.value)}
+          mask={'9999.99'}
+        />
         <SubmitButton isAnimate={isLoading} disabled={isLoading}>
           Оплатить
         </SubmitButton>

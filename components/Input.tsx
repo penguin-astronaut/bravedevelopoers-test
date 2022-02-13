@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import React from 'react';
+import InputMask from 'react-input-mask';
+import styled from 'styled-components';
 
 type InputWrapperProp = {
   error?: Boolean;
@@ -11,7 +12,7 @@ const InputWrapper = styled.div<InputWrapperProp>`
   font-size: 18px;
 `;
 
-const InputHTML = styled.input`
+const InputHTML = styled(InputMask)`
   width: 100%;
   height: 45px;
   padding: 0 12px;
@@ -42,13 +43,30 @@ const Placeholder = styled.p`
 
 type InputProps = {
   placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  mask: string;
 };
 
-export const Input = ({ placeholder, ...props }: InputProps) => {
+export const Input = ({
+  placeholder,
+  onChange,
+  value,
+  mask,
+  ...props
+}: InputProps) => {
   return (
     <InputWrapper>
-      <InputHTML type="text" required />
-      <Placeholder {...props}>{placeholder}</Placeholder>
+      <InputHTML
+        type="text"
+        mask={mask}
+        onChange={onChange}
+        value={value}
+        maskPlaceholder={null}
+        required
+        {...props}
+      />
+      <Placeholder>{placeholder}</Placeholder>
     </InputWrapper>
   );
 };
