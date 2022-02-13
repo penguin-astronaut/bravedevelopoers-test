@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { useOperatorContext } from '../operators.context';
+import { IOperator } from '../lib/operators';
 
 interface IListLinkProps {
   shadowColor?: string;
@@ -56,8 +56,11 @@ const ListLinkIcon = styled.div`
   position: relative;
 `;
 
-export const OperatorList = () => {
-  const operators = useOperatorContext();
+type OperatorListProp = {
+  operators: Array<IOperator>;
+};
+
+export const OperatorList = ({ operators }: OperatorListProp) => {
   return (
     <ListWrapper>
       <List>

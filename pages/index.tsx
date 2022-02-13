@@ -1,16 +1,28 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import { OperatorList } from '../components/OperatorList';
 import { Card } from '../components/Card';
+import { IOperator, operators } from '../lib/operators';
 
-const Home: NextPage = () => {
+type HomePageProps = {
+  operators: Array<IOperator>;
+};
+
+const Home: NextPage<HomePageProps> = ({ operators }) => {
   return (
     <>
       <Card title={'Выберите оператора'}>
-        <OperatorList />
+        <OperatorList operators={operators} />
       </Card>
     </>
   );
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  return {
+    props: {
+      operators,
+    },
+  };
+}

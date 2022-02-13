@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import styled, { css, keyframes } from 'styled-components';
 
 import { Card } from '../components/Card';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
-import { IOperator, useOperatorContext } from '../operators.context';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { api } from '../utils/apiFake';
 import { SuccessMessage } from '../components/SuccessMessage';
-import { string } from 'prop-types';
+import { getOperator, getOperatorsLinkName, IOperator } from '../lib/operators';
 
 const OperatorWrapper = styled.div`
   display: flex;
@@ -68,33 +66,16 @@ const SubmitButton = styled(Button)<ButtonProps>`
   }}
 `;
 
-const Payment: NextPage = () => {
-  const router = useRouter();
-  const [operator, setOperator] = useState<IOperator | null>(null);
+type PaymentProps = {
+  operator: IOperator;
+};
+
+const Payment: NextPage<PaymentProps> = ({ operator }) => {
   const [phone, setPhone] = useState('');
   const [sum, setSum] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-
-  const operators = useOperatorContext();
-
-  useEffect(() => {
-    const { operator: operatorParam } = router.query;
-    if (!operatorParam) {
-      return;
-    }
-    const operatorIndex = operators?.findIndex(
-      ({ linkName }) => linkName === operatorParam
-    );
-
-    if (operators && operatorIndex !== undefined && operatorIndex >= 0) {
-      setOperator(operators[operatorIndex]);
-      return;
-    }
-
-    router.push('/');
-  }, [router, operators]);
 
   const onSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -152,3 +133,26 @@ const Payment: NextPage = () => {
 };
 
 export default Payment;
+
+export async function getStaticPaths() {
+  const paths = getOperatorsLinkName();
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+type Params = {
+  params: {
+    operator: string;
+  };
+};
+
+export async function getStaticProps({ params }: Params) {
+  const operator = getOperator(params.operator);
+  return {
+    props: {
+      operator,
+    },
+  };
+}
