@@ -32,7 +32,7 @@ const ListLink = styled.a<IListLinkProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
+  width: 180px;
   height: 60px;
   border: 0.5px solid rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
