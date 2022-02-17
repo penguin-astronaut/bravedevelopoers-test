@@ -23,15 +23,49 @@ const ButtonSubmit = styled(Button)`
   text-transform: uppercase;
 `;
 
+type FormErrorState = {
+  name: string;
+  img: string;
+};
+
 const Add = () => {
   const [name, setName] = useState('');
   const [img, setImg] = useState('');
   const [color, setColor] = useState('#000000');
 
+  const [formErrors, setFormErrors] = useState<FormErrorState>({
+    name: '',
+    img: '',
+  });
+
   const router = useRouter();
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+
+    let isError = false;
+
+    const nameLength = name.trim().length;
+    if (nameLength < 1 || nameLength > 11) {
+      setFormErrors((prevState) => ({
+        ...prevState,
+        name: 'Длина названия от 1 до 11 символов',
+      }));
+      isError = true;
+    }
+
+    if (!/^https:\/\/[^\s]*\.(svg|jpg|png|jpeg)/.test(img)) {
+      setFormErrors((prevState) => ({
+        ...prevState,
+        img: 'Некорректная ссылка',
+      }));
+
+      isError = true;
+    }
+
+    if (isError) {
+      return;
+    }
 
     fetch('/api/operators', {
       method: 'POST',
@@ -53,12 +87,26 @@ const Add = () => {
         <Input
           placeholder={'Название'}
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          error={formErrors.name}
+          onChange={(e) => {
+            setName(e.target.value);
+            setFormErrors((prevState) => ({
+              ...prevState,
+              name: '',
+            }));
+          }}
         />
         <Input
           placeholder={'Ссылка на иконку'}
           value={img}
-          onChange={(e) => setImg(e.target.value)}
+          error={formErrors.img}
+          onChange={(e) => {
+            setImg(e.target.value);
+            setFormErrors((prevState) => ({
+              ...prevState,
+              img: '',
+            }));
+          }}
         />
         <Label>
           {'Цвет тени:'}
