@@ -4,8 +4,9 @@ import Image from 'next/image';
 import styled, { css, keyframes } from 'styled-components';
 
 import { Card } from '../components/Card';
-import { Input } from '../components/Input';
+import { InputMasked } from '../components/Input';
 import { Button } from '../components/Button';
+import { Form } from '../components/Form';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { SuccessMessage } from '../components/SuccessMessage';
 import { api } from '../utils/apiFake';
@@ -23,14 +24,6 @@ const OperatorIcon = styled.div`
 const OperatorName = styled.p`
   font-size: 20px;
   font-weight: 500;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 300px;
-  max-width: 100%;
 `;
 
 type ButtonProps = {
@@ -140,7 +133,7 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
         </OperatorWrapper>
       )}
       <Form onSubmit={onSubmit}>
-        <Input
+        <InputMasked
           placeholder={'Телефон'}
           value={phone}
           onChange={(e) => {
@@ -153,7 +146,7 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
           mask={'+7(\\999) 999 99 99'}
           error={formErrors.phone}
         />
-        <Input
+        <InputMasked
           placeholder={'Сумма'}
           value={sum}
           onChange={(e) => {

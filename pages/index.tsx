@@ -82,6 +82,21 @@ const Home: NextPage<HomePageProps> = ({ operators }) => {
                 </Link>
               </ListItem>
             ))}
+            <ListItem>
+              <Link href={`/add`} passHref>
+                <ListLink>
+                  <ListLinkIcon>
+                    <Image
+                      src={'/add.svg'}
+                      alt={'добавить'}
+                      width={35}
+                      height={35}
+                    />
+                  </ListLinkIcon>
+                  Добавить
+                </ListLink>
+              </Link>
+            </ListItem>
           </List>
         </ListWrapper>
       </Card>

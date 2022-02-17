@@ -44,7 +44,7 @@ const ErrorMessage = styled.p`
   color: var(--errorColor);
 `;
 
-const InputHTML = styled(InputMask)`
+const BaseInputStyles = css`
   width: 100%;
   height: 45px;
   padding: 0 12px;
@@ -61,20 +61,46 @@ const InputHTML = styled(InputMask)`
   }
 `;
 
-interface InputProps extends InputMaskProps {
+const InputWithMask = styled(InputMask)`
+  ${BaseInputStyles}
+`;
+
+const InputHTML = styled.input`
+  ${BaseInputStyles}
+`;
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  error?: string;
+}
+interface InputMaskedProps extends InputMaskProps {
   error?: string;
 }
 
-export const Input = ({ error, placeholder, mask, ...props }: InputProps) => {
+export const InputMasked = ({
+  error,
+  placeholder,
+  mask,
+  ...props
+}: InputMaskedProps) => {
   return (
     <InputWrapper error={error}>
-      <InputHTML
+      <InputWithMask
         type="text"
         mask={mask}
         maskPlaceholder={null}
         required
         {...props}
       />
+      <Placeholder>{placeholder}</Placeholder>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+    </InputWrapper>
+  );
+};
+
+export const Input = ({ error, placeholder, ...props }: InputProps) => {
+  return (
+    <InputWrapper error={error}>
+      <InputHTML type="text" required {...props} />
       <Placeholder>{placeholder}</Placeholder>
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </InputWrapper>

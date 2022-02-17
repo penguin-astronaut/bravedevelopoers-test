@@ -1,5 +1,3 @@
-import operator from '../pages/[operator]';
-
 export interface IOperator {
   name: string;
   linkName: string;
