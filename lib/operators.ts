@@ -1,41 +1,32 @@
-export interface IOperator {
+import operators from '../operators.json';
+
+export interface IOperatorNew {
   name: string;
-  linkName: string;
   img: string;
   color: string;
+  isCreated?: boolean;
 }
 
-export const operators: Array<IOperator> = [
-  {
-    name: 'МТС',
-    img: '/mts.png',
-    color: '#f35e5e7a',
-    linkName: 'mts',
-  },
-  {
-    name: 'Мегафон',
-    img: '/megafon.png',
-    color: '#72db917a',
-    linkName: 'megafon',
-  },
-  {
-    name: 'Билайн',
-    img: '/beeline.png',
-    color: '#f3e15b7a',
-    linkName: 'beeline',
-  },
-];
+export interface IOperator extends IOperatorNew {
+  id: number;
+}
 
-export const getOperatorsLinkName = () => {
-  return operators.map(({ linkName }) => {
+export const getOperatorsPath = () => {
+  return operators.map(({ id }) => {
     return {
       params: {
-        operator: linkName,
+        operator: String(id),
       },
     };
   });
 };
 
-export const getOperator = (param: string) => {
-  return operators.find(({ linkName }) => linkName === param);
+export const getOperator = (queryId: number): IOperator | false => {
+  return operators.find(({ id }) => id === queryId) ?? false;
 };
+
+export const addOperator = (operatorNew: IOperatorNew) => {
+  return operators.push({ ...operatorNew, id: Date.now() });
+};
+
+export const getOperators = (): Array<IOperator> => operators;

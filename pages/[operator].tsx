@@ -10,7 +10,7 @@ import { Form } from '../components/Form';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { SuccessMessage } from '../components/SuccessMessage';
 import { api } from '../utils/apiFake';
-import { getOperator, getOperatorsLinkName, IOperator } from '../lib/operators';
+import { getOperator, getOperatorsPath, IOperator } from '../lib/operators';
 
 const OperatorWrapper = styled.div`
   display: flex;
@@ -122,12 +122,21 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
       {operator && (
         <OperatorWrapper>
           <OperatorIcon>
-            <Image
-              src={operator.img}
-              alt={operator.name}
-              width={40}
-              height={40}
-            />
+            {operator.isCreated ? (
+              <img
+                src={operator.img}
+                alt={operator.name}
+                width={45}
+                height={45}
+              />
+            ) : (
+              <Image
+                src={operator.img}
+                alt={operator.name}
+                width={40}
+                height={40}
+              />
+            )}
           </OperatorIcon>
           <OperatorName>{operator?.name}</OperatorName>
         </OperatorWrapper>
@@ -170,10 +179,11 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
 export default Payment;
 
 export async function getStaticPaths() {
-  const paths = getOperatorsLinkName();
+  const paths = getOperatorsPath();
+
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -184,7 +194,12 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const operator = getOperator(params.operator);
+  const operator = getOperator(parseInt(params.operator));
+
+  if (!operator) {
+    return { notFound: true };
+  }
+
   return {
     props: {
       operator,
