@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import path from 'path';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import operators from '../../operators.json';
 
@@ -8,7 +9,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     fs.writeFileSync(
-      'operators.json',
+      path.join(process.cwd(), './operators.json'),
       JSON.stringify([...operators, { ...req.body, id: Date.now() }])
     );
     return res.status(200).json({ status: 'success' });
