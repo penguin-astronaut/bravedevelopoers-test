@@ -10,7 +10,7 @@ import { Form } from '../components/Form';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { SuccessMessage } from '../components/SuccessMessage';
 import { api } from '../utils/apiFake';
-import { getOperator, getOperatorsPath, IOperator } from '../lib/operators';
+import { getOperator, getOperatorsPath, IOperator } from './api/operators';
 
 const OperatorWrapper = styled.div`
   display: flex;

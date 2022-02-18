@@ -1,1 +1,20 @@
-[{"id":1,"name":"МТС","img":"/mts.png","color":"#f35e5e7a"},{"id":2,"name":"Мегафон","img":"/megafon.png","color":"#72db917a"},{"id":3,"name":"Билайн","img":"/beeline.png","color":"#f3e15b7a"},{"name":"asdasd","img":"https://acdn.tinkoff.ru/static/documents/80f3f5f9-eabc-4b45-9c5f-30c048a8a756.png","color":"#000000","isCreated":true,"id":1645157303242}]
+[
+  {
+    "id":1,
+    "name":"МТС",
+    "img":"/mts.png",
+    "color":"#f35e5e7a"
+  },
+  {
+    "id":2,
+    "name":"Мегафон",
+    "img":"/megafon.png",
+    "color":"#72db917a"
+  },
+  {
+    "id":3,
+    "name":"Билайн",
+    "img":"/beeline.png",
+    "color":"#f3e15b7a"
+  }
+]

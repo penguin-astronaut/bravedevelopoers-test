@@ -6,7 +6,7 @@ import type { NextPage } from 'next';
 import { Card } from '../components/Card';
 
 import styled from 'styled-components';
-import { IOperator, getOperators } from '../lib/operators';
+import { getOperators, IOperator } from './api/operators';
 
 interface IListLinkProps {
   shadowColor?: string;

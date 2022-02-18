@@ -4,7 +4,6 @@ import { Input } from '../components/Input';
 import styled from 'styled-components';
 import { Button } from '../components/Button';
 import React, { useState } from 'react';
-import { addOperator } from '../lib/operators';
 import { useRouter } from 'next/router';
 
 const Label = styled.label`
