@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import getConfig from 'next/config';
+import path from 'path';
 const { serverRuntimeConfig } = getConfig();
 
 export interface IOperator {
@@ -17,7 +18,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     fs.writeFileSync(
-      `${serverRuntimeConfig.PROJECT_ROOT}/operators.json`,
+      path.join(process.cwd(), 'operators.json'),
       JSON.stringify([...getOperators(), { ...req.body, id: Date.now() }])
     );
     return res.status(200).json({ status: 'success' });
@@ -25,9 +26,7 @@ export default async function handler(
 }
 
 export const getOperators = (): Array<IOperator> => {
-  const json = fs.readFileSync(
-    `${serverRuntimeConfig.PROJECT_ROOT}/operators.json`
-  );
+  const json = fs.readFileSync(path.join(process.cwd(), 'operators.json'));
   return JSON.parse(json.toString());
 };
 
