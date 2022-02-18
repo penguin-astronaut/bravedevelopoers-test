@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     fs.writeFileSync(
-      path.join(process.cwd(), './operators.json'),
+      './../../operators.json',
       JSON.stringify([...operators, { ...req.body, id: Date.now() }])
     );
     return res.status(200).json({ status: 'success' });
