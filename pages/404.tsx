@@ -1,41 +1,9 @@
-import Link from 'next/link';
-import styled from 'styled-components';
-import { Wrapper } from '../components/Wrapper';
+import { HttpError } from '../components/HttpError';
 
-const Wrapper404 = styled(Wrapper)`
-  width: 450px;
-  height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const Title = styled.h1`
-  font-size: 80px;
-  font-weight: 500;
-  margin-bottom: 10px;
-`;
-
-const Text = styled.p`
-  font-size: 20px;
-  margin-bottom: 10px;
-`;
-
-const MainLink = styled.a`
-  font-size: 20px;
-  color: var(--mainColor);
-  text-decoration: none;
-`;
-
-export const Page404 = () => (
-  <Wrapper404>
-    <Title>404</Title>
-    <Text>Страница не найдена</Text>
-    <Link href={'/'} passHref>
-      <MainLink>Перейти на главную</MainLink>
-    </Link>
-  </Wrapper404>
-);
+const Page404 = () => {
+  return (
+    <HttpError code={'404'} message={'Страница не найден!'} isShowLink={true} />
+  );
+};
 
 export default Page404;
