@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import styled from 'styled-components';
 
 import type { NextPage } from 'next';
 import { Card } from '../components/Card';
-
-import styled from 'styled-components';
-import { getOperators, IOperator } from './api/operators';
+import { IOperator } from '../utils/Types';
+import { getAll } from '../utils/apiOperator';
 
 interface IListLinkProps {
   shadowColor?: string;
@@ -70,12 +70,12 @@ const Home: NextPage<HomePageProps> = ({ operators }) => {
       <Card title={'Выберите оператора'}>
         <ListWrapper>
           <List>
-            {operators?.map(({ name, color, img, id, isCreated }) => (
+            {operators?.map(({ name, color, img, slug, isUserCreated }) => (
               <ListItem key={name}>
-                <Link href={`/${id}`} passHref>
+                <Link href={`/${slug}`} passHref>
                   <ListLink shadowColor={color}>
                     <ListLinkIcon>
-                      {isCreated ? (
+                      {isUserCreated ? (
                         <img src={img} alt={name} width={35} height={35} />
                       ) : (
                         <Image src={img} alt={name} width={35} height={35} />
@@ -111,9 +111,11 @@ const Home: NextPage<HomePageProps> = ({ operators }) => {
 export default Home;
 
 export async function getServerSideProps() {
+  const operators = await getAll();
+
   return {
     props: {
-      operators: getOperators(),
+      operators,
     },
   };
 }

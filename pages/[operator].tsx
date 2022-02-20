@@ -10,7 +10,8 @@ import { Form } from '../components/Form';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { SuccessMessage } from '../components/SuccessMessage';
 import { api } from '../utils/apiFake';
-import { getOperator, getOperatorsPath, IOperator } from './api/operators';
+import { IOperator } from '../utils/Types';
+import { getAll, getBySlug } from '../utils/apiOperator';
 
 const OperatorWrapper = styled.div`
   display: flex;
@@ -122,7 +123,7 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
       {operator && (
         <OperatorWrapper>
           <OperatorIcon>
-            {operator.isCreated ? (
+            {operator.isUserCreated ? (
               <img
                 src={operator.img}
                 alt={operator.name}
@@ -179,7 +180,14 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
 export default Payment;
 
 export async function getStaticPaths() {
-  const paths = getOperatorsPath();
+  const operators = await getAll();
+  const paths = operators.map(({ slug }) => {
+    return {
+      params: {
+        operator: slug,
+      },
+    };
+  });
 
   return {
     paths,
@@ -194,10 +202,10 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const operator = getOperator(parseInt(params.operator));
+  const { operator, notFound } = await getBySlug(params.operator);
 
-  if (!operator) {
-    return { notFound: true };
+  if (notFound) {
+    return { notFound };
   }
 
   return {

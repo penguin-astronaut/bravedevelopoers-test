@@ -2,9 +2,11 @@ import { Card } from '../components/Card';
 import { Form } from '../components/Form';
 import { Input } from '../components/Input';
 import styled from 'styled-components';
-import { Button } from '../components/Button';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+
+import { Button } from '../components/Button';
+import { addNew } from '../utils/apiOperator';
 
 const Label = styled.label`
   display: flex;
@@ -31,7 +33,8 @@ const Add = () => {
   const [name, setName] = useState('');
   const [img, setImg] = useState('');
   const [color, setColor] = useState('#000000');
-
+  const [isReqError, setIsReqError] = useState(false);
+  const [isReqSuccess, setIsReqSuccess] = useState(false);
   const [formErrors, setFormErrors] = useState<FormErrorState>({
     name: '',
     img: '',
@@ -66,18 +69,9 @@ const Add = () => {
       return;
     }
 
-    fetch('/api/operators', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        img,
-        color,
-        isCreated: true,
-      }),
-    }).then(() => router.push('/'));
+    addNew({ name, img, color })
+      .then(() => router.push('/'))
+      .catch(() => console.log('Ошибка'));
   };
 
   return (
