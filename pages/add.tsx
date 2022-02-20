@@ -1,12 +1,14 @@
-import { Card } from '../components/Card';
-import { Form } from '../components/Form';
-import { Input } from '../components/Input';
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
+import { Card } from '../components/Card';
+import { Form, SubmitButton } from '../components/Form';
+import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { addNew } from '../utils/apiOperator';
+import { SuccessMessage } from '../components/SuccessMessage';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 const Label = styled.label`
   display: flex;
@@ -17,11 +19,6 @@ const Label = styled.label`
 
 const InputColor = styled.input`
   margin-left: 10px;
-`;
-
-const ButtonSubmit = styled(Button)`
-  width: 100%;
-  text-transform: uppercase;
 `;
 
 type FormErrorState = {
@@ -35,12 +32,11 @@ const Add = () => {
   const [color, setColor] = useState('#000000');
   const [isReqError, setIsReqError] = useState(false);
   const [isReqSuccess, setIsReqSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState<FormErrorState>({
     name: '',
     img: '',
   });
-
-  const router = useRouter();
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -69,10 +65,28 @@ const Add = () => {
       return;
     }
 
+    setIsLoading(true);
+
     addNew({ name, img, color })
-      .then(() => router.push('/'))
-      .catch(() => console.log('Ошибка'));
+      .then(() => setIsReqSuccess(true))
+      .catch(() => setIsReqError(true))
+      .finally(() => setIsLoading(false));
   };
+
+  if (isReqSuccess) {
+    return (
+      <SuccessMessage message={'Оператор добавлен!'} redirectAfterMs={1500} />
+    );
+  }
+
+  if (isReqError) {
+    return (
+      <ErrorMessage
+        message={'При добавлении произошла ошибка'}
+        clickHandler={() => setIsReqError(false)}
+      />
+    );
+  }
 
   return (
     <Card title={'Добавить'} isShowLink={true}>
@@ -109,7 +123,9 @@ const Add = () => {
             onChange={(e) => setColor(e.target.value)}
           />
         </Label>
-        <ButtonSubmit>Добавить</ButtonSubmit>
+        <SubmitButton isAnimate={isLoading} disabled={isLoading}>
+          Добавить
+        </SubmitButton>
       </Form>
     </Card>
   );

@@ -8,6 +8,7 @@ import {
   MessageTextWrapper,
 } from './MessageLayout';
 import { ButtonSecondary, ButtonSuccess } from './Button';
+import React from 'react';
 
 const ButtonsWrapper = styled.div`
   margin-top: 20px;
@@ -22,10 +23,14 @@ const ButtonWrapper = styled.div`
   margin: 10px;
 `;
 
-type ErrorMessage = {
+type ErrorMessageProps = {
+  message: string;
   clickHandler: () => void;
 };
-export const ErrorMessage = ({ clickHandler }: ErrorMessage) => {
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({
+  message,
+  clickHandler,
+}) => {
   const router = useRouter();
 
   return (
@@ -38,7 +43,7 @@ export const ErrorMessage = ({ clickHandler }: ErrorMessage) => {
           alt={'error'}
           priority={true}
         />
-        <MessageText>Оплата не удалась</MessageText>
+        <MessageText>{message}</MessageText>
       </MessageTextWrapper>
       <ButtonsWrapper>
         <ButtonWrapper>

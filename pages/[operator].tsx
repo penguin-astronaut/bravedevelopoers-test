@@ -5,8 +5,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 import { Card } from '../components/Card';
 import { InputMasked } from '../components/Input';
-import { Button } from '../components/Button';
-import { Form } from '../components/Form';
+import { Form, SubmitButton } from '../components/Form';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { SuccessMessage } from '../components/SuccessMessage';
 import { api } from '../utils/apiFake';
@@ -25,40 +24,6 @@ const OperatorIcon = styled.div`
 const OperatorName = styled.p`
   font-size: 20px;
   font-weight: 500;
-`;
-
-type ButtonProps = {
-  isAnimate?: Boolean;
-};
-
-const rotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-
-const SubmitButton = styled(Button)<ButtonProps>`
-  width: ${(props) => (props.isAnimate ? '45px' : '100%')};
-  font-size: 20px;
-  height: 45px;
-  padding: 0 10px;
-  ${(props) => {
-    if (props.isAnimate) {
-      return css`
-        border: var(--borderRadius) solid transparent;
-        border-top-color: var(--mainColor);
-        animation: ${rotate} 1s linear infinite;
-        animation-delay: 0.4s;
-        pointer-events: none;
-        cursor: default;
-        border-radius: 50%;
-        color: transparent;
-      `;
-    }
-  }}
 `;
 
 type PaymentProps = {
@@ -111,11 +76,16 @@ const Payment: NextPage<PaymentProps> = ({ operator }) => {
   };
 
   if (success) {
-    return <SuccessMessage />;
+    return <SuccessMessage message={'Оплата прошла успешно!'} />;
   }
 
   if (error) {
-    return <ErrorMessage clickHandler={() => setError(false)} />;
+    return (
+      <ErrorMessage
+        message={'Оплата не удалась'}
+        clickHandler={() => setError(false)}
+      />
+    );
   }
 
   return (

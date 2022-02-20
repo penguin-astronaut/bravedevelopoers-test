@@ -4,14 +4,22 @@ import {
   MessageText,
   MessageTextWrapper,
 } from './MessageLayout';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-export const SuccessMessage = () => {
+type SuccessMessageProps = {
+  message: string;
+  redirectAfterMs?: number;
+};
+
+export const SuccessMessage: React.FC<SuccessMessageProps> = ({
+  message,
+  redirectAfterMs = 3000,
+}) => {
   const router = useRouter();
 
   useEffect(() => {
-    const timeout = setTimeout(() => router.push('/'), 5000);
+    const timeout = setTimeout(() => router.push('/'), redirectAfterMs);
 
     return () => clearTimeout(timeout);
   });
@@ -26,7 +34,7 @@ export const SuccessMessage = () => {
           alt={'success'}
           priority={true}
         />
-        <MessageText>Оплата прошла успешно!</MessageText>
+        <MessageText>{message}</MessageText>
       </MessageTextWrapper>
     </MessageLayout>
   );
