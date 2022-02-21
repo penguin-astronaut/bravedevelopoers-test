@@ -76,7 +76,7 @@ const Home: NextPage<HomePageProps> = ({ operators }) => {
                   <ListLink shadowColor={color}>
                     <ListLinkIcon>
                       {isUserCreated ? (
-                        <img src={img} alt={name} width={35} height={35} />
+                        <img src={img} alt={name} width={35} height={35} loading="lazy"/>
                       ) : (
                         <Image src={img} alt={name} width={35} height={35} />
                       )}
